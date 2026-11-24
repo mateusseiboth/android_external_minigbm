@@ -197,8 +197,13 @@ ndk::ScopedAStatus Allocator::isSupported(const BufferDescriptorInfo& descriptor
     return ndk::ScopedAStatus::ok();
 }
 
+// The stable-C mapper this allocator pairs with: mapper.<suffix>.so (one per minigbm backend).
+#ifndef MINIGBM_MAPPER_SUFFIX
+#define MINIGBM_MAPPER_SUFFIX "minigbm"
+#endif
+
 ndk::ScopedAStatus Allocator::getIMapperLibrarySuffix(std::string* outResult) {
-    *outResult = "minigbm";
+    *outResult = MINIGBM_MAPPER_SUFFIX;
     return ndk::ScopedAStatus::ok();
 }
 

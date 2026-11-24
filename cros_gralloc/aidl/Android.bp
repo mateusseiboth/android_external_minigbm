@@ -61,3 +61,35 @@ prebuilt_etc {
     sub_dir: "vintf",
     installable: false,
 }
+
+// gbm_mesa backend: Mesa's GBM computes buffer layouts, so one gralloc serves every Mesa GPU.
+cc_binary {
+    name: "android.hardware.graphics.allocator-service.minigbm_gbm_mesa",
+    defaults: ["minigbm_cros_gralloc_defaults"],
+    relative_install_path: "hw",
+    init_rc: ["allocator_gbm_mesa.rc"],
+    vintf_fragments: ["allocator.xml"],
+    vendor: true,
+    cflags: [
+        "-DDRV_EXTERNAL",
+        "-DMINIGBM_MAPPER_SUFFIX=\"minigbm_gbm_mesa\"",
+    ],
+    shared_libs: [
+        "android.hardware.graphics.allocator-V3-ndk",
+        "android.hardware.graphics.mapper@4.0",
+        "libbase",
+        "libbinder_ndk",
+        "libgralloctypes",
+        "libhidlbase",
+        "liblog",
+        "libminigbm_gralloc_gbm_mesa",
+        "libminigbm_gralloc4_utils",
+    ],
+    static_libs: [
+        "libaidlcommonsupport",
+    ],
+    srcs: [
+        "Allocator.cpp",
+        "Main.cpp",
+    ],
+}
