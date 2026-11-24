@@ -27,6 +27,7 @@ extern "C" {
 #include "util.h"
 #include <algorithm>
 #include <array>
+#include <functional>
 #include <cutils/properties.h>
 #include <dlfcn.h>
 #include <errno.h>
