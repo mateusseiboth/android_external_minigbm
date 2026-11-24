@@ -28,6 +28,7 @@ extern "C" {
 #include <algorithm>
 #include <array>
 #include <functional>
+#include <string>
 #include <cutils/properties.h>
 #include <dlfcn.h>
 #include <errno.h>
